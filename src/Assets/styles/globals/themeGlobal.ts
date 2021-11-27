@@ -39,6 +39,6 @@ export const theme = {
       1000: "#151A30",
       1100: "#101426",
     },
-    modalBackground: "#000000",
+    modalBackground: "rgba(0, 0, 0, 0.35)",
   },
 };
