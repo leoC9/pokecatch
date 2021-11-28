@@ -4,13 +4,13 @@ import searchTooltip from "../../Assets/images/searchTooltip.png";
 import searchingTooltip from "../../Assets/images/searchingTooltip.png";
 import errorTooltip from "../../Assets/images/tooltipError.png";
 
-type tooltipOptions = {
-  [key: string]: any;
-};
-
 interface TooltipProps {
   type: string;
 }
+
+type tooltipOptions = {
+  [key: string]: JSX.Element;
+};
 
 const Tooltip = (props: TooltipProps) => {
   const tooltipType: tooltipOptions = {
@@ -18,7 +18,7 @@ const Tooltip = (props: TooltipProps) => {
     searching: <TooltipImg src={searchingTooltip} />,
     error: <TooltipImg src={errorTooltip} />,
   };
-  return <>{tooltipType[props.type!]}</>;
+  return tooltipType[props.type!];
 };
 
 export default Tooltip;

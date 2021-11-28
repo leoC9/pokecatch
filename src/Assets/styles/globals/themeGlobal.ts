@@ -11,7 +11,7 @@ export const theme = {
       bug: "#87950C",
       dark: "#413831",
       dragon: "#7361D1",
-      eletric: "#E08D00",
+      electric: "#E08D00",
       fairy: "#E29FE6",
       fighting: "#852816",
       fire: "#CF2C03",

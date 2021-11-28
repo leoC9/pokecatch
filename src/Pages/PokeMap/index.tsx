@@ -3,13 +3,18 @@ import * as S from "./styles";
 import ash from "../../Assets/images/ashFront.png";
 import Tooltip from "../../Components/Tooltip";
 import Modal from "../../Components/Modal";
+import { getRandomPokemon } from "../../Services/pokémons";
+import Sidebar from "../../Components/Sidebar";
 
 const PokeMap = () => {
   const [ashActive, setAshActive] = useState(false);
   const [modalActive, setModalActive] = useState(false);
+  const [pokemonData, setPokemonData] = useState<any>(null);
 
-  function searchPokémon() {
+  async function searchPokémon() {
     setAshActive(true);
+    const response = await getRandomPokemon();
+    setPokemonData(response);
     setTimeout(() => {
       setModalActive(true);
       setAshActive(false);
@@ -31,11 +36,16 @@ const PokeMap = () => {
   return (
     <>
       <S.Background>
+        <Sidebar />
         <S.CharacterArea animationStatic={ashActive ? true : false}>
           {ashSpites}
         </S.CharacterArea>
       </S.Background>
-      <Modal modalActive={modalActive} setModalActive={setModalActive} />
+      <Modal
+        modalActive={modalActive}
+        pokemon={pokemonData}
+        setModalActive={setModalActive}
+      />
     </>
   );
 };

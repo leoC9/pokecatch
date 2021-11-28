@@ -22,8 +22,8 @@ export const Background = styled.div`
   align-items: center;
 `;
 export const CharacterArea = styled.main<CharacterAreaProps>`
-  width: 8.5rem;
-  height: 8.8rem;
+  width: 6.4rem;
+  height: 6.4rem;
   position: relative;
   display: flex;
   :hover img {
@@ -42,16 +42,18 @@ export const CharacterArea = styled.main<CharacterAreaProps>`
   }
 `;
 export const Ash = styled.img`
-  width: 8.5rem;
-  height: 8.5rem;
+  /* width: 8.5rem;
+  height: 8.5rem; */
   margin: 0 auto;
   :hover {
     cursor: pointer;
   }
 `;
 export const AshWalking = styled.div`
-  width: 5.944rem;
-  height: 7.172rem;
+  /* width: 5.944rem;
+  height: 7.172rem; */
+  width: 4.4rem;
+  height: 5.4rem;
   background: url(${ashStop}) no-repeat;
   animation: walk 2s infinite;
   background-size: cover;

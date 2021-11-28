@@ -8,14 +8,14 @@ export const TooltipImg = styled.img`
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
-  width: 8rem;
+  /* width: 8rem; */
 
   /* Position the tooltip */
   position: absolute;
   z-index: 1;
   bottom: 80%;
   left: 0;
-  margin-left: 7px;
+  margin-left: 0px;
   opacity: 0;
   transition: all 500ms ease-in-out;
 `;
