@@ -4,8 +4,9 @@ import ashStop from "../../Assets/images/ashStop.png";
 import ashRightLeg from "../../Assets/images/ashRightLeg.png";
 import ashLeftLeg from "../../Assets/images/ashLeftLeg.png";
 
-interface CharacterAreaProps {
+interface PokeMapProps {
   animationStatic?: boolean;
+  cursorDisabled?: boolean;
 }
 
 export const Background = styled.div`
@@ -21,7 +22,7 @@ export const Background = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export const CharacterArea = styled.main<CharacterAreaProps>`
+export const CharacterArea = styled.main<PokeMapProps>`
   width: 6.4rem;
   height: 6.4rem;
   position: relative;
@@ -41,12 +42,12 @@ export const CharacterArea = styled.main<CharacterAreaProps>`
   `}
   }
 `;
-export const Ash = styled.img`
+export const Ash = styled.img<PokeMapProps>`
   /* width: 8.5rem;
   height: 8.5rem; */
   margin: 0 auto;
   :hover {
-    cursor: pointer;
+    cursor: ${({ cursorDisabled }) => (cursorDisabled ? "no-drop" : "pointer")};
   }
 `;
 export const AshWalking = styled.div`

@@ -1,22 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as S from "./styles";
 import ash from "../../Assets/images/ashFront.png";
 import Tooltip from "../../Components/Tooltip";
 import Modal from "../../Components/Modal";
 import { getRandomPokemon } from "../../Services/pokémons";
 import Sidebar from "../../Components/Sidebar";
+import { useDispatch, useSelector } from "react-redux";
+import { getPokemons, getWildPokemon } from "../../Stores/pokemonActions";
 
 const PokeMap = () => {
   const [ashActive, setAshActive] = useState(false);
-  const [modalActive, setModalActive] = useState(false);
-  const [pokemonData, setPokemonData] = useState<any>(null);
+  const [modalProps, setModalProps] = useState({
+    active: false,
+    type: "capture",
+  });
+  const [slotFull, setSlotFull] = useState(false);
+
+  const dispatch = useDispatch();
+  const { catchedPokemons } = useSelector(({ pokemon }: any) => pokemon);
 
   async function searchPokémon() {
+    if (catchedPokemons.length === 6) {
+      return;
+    }
     setAshActive(true);
-    const response = await getRandomPokemon();
-    setPokemonData(response);
+    dispatch(await getWildPokemon());
     setTimeout(() => {
-      setModalActive(true);
+      setModalProps({ type: "capture", active: true });
       setAshActive(false);
     }, 2500);
   }
@@ -28,24 +38,33 @@ const PokeMap = () => {
     </>
   ) : (
     <>
-      <S.Ash onClick={searchPokémon} src={ash} alt="ash" />
-      <Tooltip type="search" />
+      <S.Ash
+        cursorDisabled={catchedPokemons.length === 6}
+        onClick={searchPokémon}
+        src={ash}
+        alt="ash"
+      />
+      {catchedPokemons.length === 6 ? (
+        <Tooltip type="error" />
+      ) : (
+        <Tooltip type="search" />
+      )}
     </>
   );
+
+  useEffect(() => {
+    dispatch(getPokemons());
+  }, []);
 
   return (
     <>
       <S.Background>
-        <Sidebar />
-        <S.CharacterArea animationStatic={ashActive ? true : false}>
+        <Sidebar setSlotFull={setSlotFull} setModalProps={setModalProps} />
+        <S.CharacterArea animationStatic={ashActive || slotFull ? true : false}>
           {ashSpites}
         </S.CharacterArea>
       </S.Background>
-      <Modal
-        modalActive={modalActive}
-        pokemon={pokemonData}
-        setModalActive={setModalActive}
-      />
+      <Modal modalProps={modalProps} setModalProps={setModalProps} />
     </>
   );
 };

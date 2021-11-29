@@ -5,7 +5,7 @@ interface TypographyProps {
   type?: string;
   children?: string;
   weight?: number;
-  color?: number;
+  color?: string;
 }
 
 type typographyOptions = {
@@ -14,9 +14,13 @@ type typographyOptions = {
 
 const Typography = (props: TypographyProps) => {
   const typeHandler: typographyOptions = {
-    title: <S.Title>{props.children}</S.Title>,
-    subtitle: <S.SubTitle>{props.children}</S.SubTitle>,
-    label: <S.Label weight={props.weight}>{props.children}</S.Label>,
+    title: <S.Title color={props.color}>{props.children}</S.Title>,
+    subtitle: <S.SubTitle color={props.color}>{props.children}</S.SubTitle>,
+    label: (
+      <S.Label color={props.color} weight={props.weight}>
+        {props.children}
+      </S.Label>
+    ),
   };
   return typeHandler[props.type!];
 };

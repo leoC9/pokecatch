@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+interface ModalProps {
+  typeModal?: string;
+  hrWidth?: string;
+}
+
 export const Background = styled.div`
   width: 100%;
   height: 100%;
@@ -17,7 +22,7 @@ export const Modal = styled.figcaption`
   width: 36rem;
   height: 55.9rem;
   position: relative;
-  background: ${({ theme }) => theme.colors.neutrals[100]};
+  background: ${({ theme }) => theme.colors.neutrals[200]};
 
   border-radius: 8px;
 `;
@@ -63,9 +68,12 @@ export const ModalContent = styled.main`
   z-index: 2;
   align-items: center;
   align-self: flex-end;
-  background: ${({ theme }) => theme.colors.neutrals[100]};
+  background: ${({ theme }) => theme.colors.neutrals[200]};
   /* border-radius: 45px 45px 13px 13px; */
   border-radius: 24px 24px 8px 8px;
+  section:last-child {
+    padding-bottom: 16rem;
+  }
 `;
 
 export const ImageArea = styled.figcaption`
@@ -81,7 +89,7 @@ export const ImageArea = styled.figcaption`
   top: 32px;
   /* right: calc(50% - 33rem / 2); */
   right: calc(50% - 24.7rem / 2);
-  background: ${({ theme }) => theme.colors.neutrals[100]};
+  background: ${({ theme }) => theme.colors.neutrals[200]};
   border-radius: 50%;
   z-index: 3;
 `;
@@ -140,14 +148,14 @@ export const DividerArea = styled.div`
   margin-top: 4.2rem;
   justify-content: space-between;
 `;
-export const Divider = styled.hr`
-  width: 40%;
+export const Divider = styled.hr<ModalProps>`
+  width: ${(props) => props.hrWidth || "40%"};
   height: 0.1rem;
   background-color: ${({ theme }) => theme.colors.neutrals[500]};
   border: none;
 `;
 
-export const TypeArea = styled.div`
+export const ElementArea = styled.section`
   width: 100%;
   max-width: 23rem;
   height: auto;
@@ -156,16 +164,42 @@ export const TypeArea = styled.div`
   align-items: center;
   margin-top: 2.7rem;
 `;
-
-export const AbilitiesArea = styled.div`
+//TODO - MUDAR A ORDEM DA LISTA
+export const StatsArea = styled.section`
   width: 100%;
-  max-width: 23rem;
-  height: 30rem;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
   margin-top: 2.7rem;
-  padding-bottom: 16rem;
+  table {
+    width: 100%;
+    tr {
+      td:nth-child(1) {
+        text-align: left;
+        display: flex;
+        align-items: center;
+        label {
+          margin-left: 1.7rem;
+        }
+        margin-bottom: 1.6rem;
+      }
+      td:nth-child(2) {
+        text-align: right;
+      }
+    }
+    tr:nth-child(even) {
+      td {
+        label {
+          margin-left: 1.323rem;
+        }
+      }
+    }
+    tr:last-child {
+      td {
+        label {
+          margin-left: 1.3rem;
+        }
+        margin-bottom: 0;
+      }
+    }
+  }
 `;
 
 export const Loader = styled.div`
@@ -188,15 +222,18 @@ export const Loader = styled.div`
   }
 `;
 
-export const PokeballButton = styled.button`
+export const PokeballButton = styled.button<ModalProps>`
   /* width: 12rem;
   height: 12rem; */
   position: absolute;
   background: transparent;
   border: none;
-  bottom: 0;
+  bottom: ${(props) => (props.typeModal === "capture" ? "0" : "52px")};
   z-index: 10;
-  right: calc(50% - 14.5rem / 2);
+  right: calc(
+    50% - ${(props) => (props.typeModal === "capture" ? "14.5rem" : "22.1rem")} /
+      2
+  );
   :hover {
     cursor: pointer;
   }

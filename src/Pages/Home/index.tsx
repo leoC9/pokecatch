@@ -3,6 +3,7 @@ import * as S from "./styles";
 import { useNavigate } from "react-router";
 import Logo from "../../Assets/images/pokemonLogo.png";
 import Button from "../../Components/Button";
+import Typography from "../../Components/Typography";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -14,7 +15,9 @@ const Home = () => {
           navigate("/map");
         }}
       >
-        START
+        <Typography color="100" type="title">
+          START
+        </Typography>
       </Button>
     </S.Background>
   );

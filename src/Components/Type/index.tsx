@@ -1,6 +1,6 @@
 import React from "react";
 import Typography from "../Typography";
-import { TypeContainer } from "./styles";
+import { TypeTag } from "./styles";
 
 interface TypeProps {
   type: string;
@@ -31,10 +31,18 @@ const Type = (props: TypeProps) => {
     steel: "aço",
     water: "água",
   };
+  console.log("type", props.type);
+
   return (
-    <TypeContainer type={props.type}>
-      {typeNameHandler[props.type]}
-    </TypeContainer>
+    <TypeTag type={props.type}>
+      <Typography
+        type="label"
+        weight={700}
+        color={props.type === "normal" || props.type === "ice" ? "1100" : "100"}
+      >
+        {typeNameHandler[props.type]}
+      </Typography>
+    </TypeTag>
   );
 };
 

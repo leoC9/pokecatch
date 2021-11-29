@@ -5,59 +5,159 @@ import Typography from "../Typography";
 import * as S from "./styles";
 import { ReactComponent as Pokeball } from "../../Assets/images/Pokeball.svg";
 import closeIcon from "../../Assets/images/close.png";
+import editIcon from "../../Assets/images/editIcon.png";
+import shieldIcon from "../../Assets/images/shield.png";
+import swordIcon from "../../Assets/images/sword.png";
+import speedIcon from "../../Assets/images/speed.png";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  clearPokemon,
+  removePokemon,
+  setCatchedPokemon,
+} from "../../Stores/pokemonActions";
+import Button from "../Button";
+
+type modalData = {
+  active: boolean;
+  type: string;
+};
 
 interface ModalProps {
-  modalActive: boolean;
-  setModalActive: Function;
+  modalProps: modalData;
+  setModalProps: Function;
+}
+
+interface PokeTeste {
   pokemon: any;
 }
 
+type modalDataOptions = {
+  [key: string]: any;
+};
 const Modal = (props: ModalProps) => {
   const [abilities, setAbilities] = useState();
+  const { pokemon } = useSelector(({ pokemon }: PokeTeste) => pokemon);
+
+  const dispatch = useDispatch();
+
   let abilityList: any = [];
+
+  function captureHandleClick() {
+    dispatch(setCatchedPokemon(pokemon));
+    props.setModalProps({ ...props.modalProps, active: false });
+    dispatch(clearPokemon());
+  }
+
+  function editHandleClick() {
+    dispatch(removePokemon(pokemon));
+    props.setModalProps({ ...props.modalProps, active: false });
+  }
+
   const infoArray = [
     {
       label: "HP",
-      title: `${props.pokemon?.stats[0].base_stat}/${props.pokemon?.stats[0].base_stat}`,
+      title: `${pokemon?.stats[0].base_stat}/${pokemon?.stats[0].base_stat}`,
     },
     {
       label: "Altura",
       title: `${
-        props.pokemon?.height > 10
-          ? props.pokemon?.height
-          : `0.${props.pokemon?.height}`
+        pokemon?.height > 10 ? pokemon?.height : `0.${pokemon?.height}`
       } m`,
     },
     {
       label: "Peso",
-      title: `${props.pokemon?.weight} kg`,
+      title: `${pokemon?.weight} kg`,
     },
   ];
-  console.log(props.pokemon);
+
+  const typeDataHandler: modalDataOptions = {
+    capture: {
+      button: <Pokeball onClick={captureHandleClick} />,
+    },
+    edit: {
+      button: (
+        <Button onClick={editHandleClick} width={22.1}>
+          LIBERAR POKEMON
+        </Button>
+      ),
+      editIcon: <img src={editIcon} />,
+      specifiedStats: (
+        <>
+          <S.DividerArea>
+            <S.Divider hrWidth="30%" />
+            <Typography type="subtitle">ESTATÍSTICAS</Typography>
+            <S.Divider hrWidth="30%" />
+          </S.DividerArea>
+          <S.StatsArea>
+            <table>
+              {pokemon?.stats.map((item: any, i: number) => {
+                const statsTable: modalDataOptions = {
+                  attack: { icon: swordIcon, name: "Ataque" },
+                  defense: { icon: shieldIcon, name: "Defesa" },
+                  "special-attack": {
+                    icon: swordIcon,
+                    name: "Ataque especial",
+                  },
+                  "special-defense": {
+                    icon: shieldIcon,
+                    name: "Defesa especial",
+                  },
+                  speed: { icon: speedIcon, name: "Velocidade" },
+                };
+                if (i > 0) {
+                  return (
+                    <tr>
+                      <td>
+                        <img src={statsTable[item.stat.name]?.icon} />
+                        <Typography type="label" weight={700}>
+                          {statsTable[item.stat.name]?.name}
+                        </Typography>
+                      </td>
+                      <td>
+                        <Typography type="subtitle">
+                          {item?.base_stat}
+                        </Typography>
+                      </td>
+                    </tr>
+                  );
+                }
+              })}
+            </table>
+          </S.StatsArea>
+        </>
+      ),
+    },
+  };
+
   useEffect(() => {
-    for (let i = 0; i < props.pokemon?.abilities.length; i++) {
-      const element = props.pokemon.abilities[i];
+    for (let i = 0; i < pokemon?.abilities.length; i++) {
+      const element = pokemon.abilities[i];
       abilityList.push(element.ability.name);
       abilityList.join();
     }
     setAbilities(abilityList.join(", "));
-  }, [props.modalActive]);
-  return props.modalActive ? (
+  }, [props.modalProps.active]);
+
+  return props.modalProps.active ? (
     <S.Background>
       <S.Modal>
         <S.ModalArea>
           <S.ModalHeader>
             <S.ImageArea>
-              <S.Pokemon src={props.pokemon?.sprites.front_default} />
+              <S.Pokemon src={pokemon?.sprites.front_default} />
             </S.ImageArea>
-            <S.CloseButton onClick={() => props.setModalActive(false)}>
+            <S.CloseButton
+              onClick={() => {
+                props.setModalProps({ ...props.modalProps, active: false });
+                dispatch(clearPokemon());
+              }}
+            >
               <img src={closeIcon} />
             </S.CloseButton>
           </S.ModalHeader>
           <S.ModalContent>
-            <Typography type="title">
-              {props.pokemon?.name.toUpperCase()}
-            </Typography>
+            <Typography type="title">{pokemon?.name.toUpperCase()}</Typography>
+            {/* {typeDataHandler[props.modalProps.type]?.editIcon} */}
             <S.InfoList>
               {infoArray.map((item, key) => (
                 <li key={key}>
@@ -73,25 +173,26 @@ const Modal = (props: ModalProps) => {
               <Typography type="subtitle">TIPO</Typography>
               <S.Divider />
             </S.DividerArea>
-            <S.TypeArea>
-              {props.pokemon?.types.map((item: any) => (
+            <S.ElementArea>
+              {pokemon?.types.map((item: any) => (
                 <Type type={item.type.name} />
               ))}
-            </S.TypeArea>
+            </S.ElementArea>
             <S.DividerArea>
-              <S.Divider />
+              <S.Divider hrWidth="30%" />
               <Typography type="subtitle">HABILIDADES</Typography>
-              <S.Divider />
+              <S.Divider hrWidth="30%" />
             </S.DividerArea>
-            <S.AbilitiesArea>
+            <S.ElementArea>
               <Typography type="label" weight={700}>
                 {abilities}
               </Typography>
-            </S.AbilitiesArea>
+            </S.ElementArea>
+            {typeDataHandler[props.modalProps.type]?.specifiedStats}
           </S.ModalContent>
         </S.ModalArea>
-        <S.PokeballButton>
-          <Pokeball />
+        <S.PokeballButton typeModal={props.modalProps.type}>
+          {typeDataHandler[props.modalProps.type]?.button}
         </S.PokeballButton>
       </S.Modal>
     </S.Background>
