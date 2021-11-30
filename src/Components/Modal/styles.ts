@@ -60,7 +60,7 @@ export const ModalArea = styled.div`
 export const ModalContent = styled.main`
   width: 100%;
   height: 40.6rem;
-  padding: 16.2rem 2.5rem 16.2rem 2.5rem;
+  padding: 13.2rem 2.5rem 16.2rem 2.5rem;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -71,8 +71,29 @@ export const ModalContent = styled.main`
   background: ${({ theme }) => theme.colors.neutrals[200]};
   /* border-radius: 45px 45px 13px 13px; */
   border-radius: 24px 24px 8px 8px;
-  section:last-child {
+  /* padding-bottom: 16rem; */
+  & > img {
+    position: absolute;
+    right: 100px;
+    top: 166px;
+    :hover {
+      cursor: pointer;
+    }
+  }
+  & > section:last-child {
     padding-bottom: 16rem;
+  }
+`;
+export const ContentData = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  z-index: 2;
+  align-items: center;
+
+  padding-bottom: 6.8rem;
+  & > button {
+    margin-top: 6rem;
   }
 `;
 
@@ -92,6 +113,74 @@ export const ImageArea = styled.figcaption`
   background: ${({ theme }) => theme.colors.neutrals[200]};
   border-radius: 50%;
   z-index: 3;
+  button {
+    position: absolute;
+    width: 3.3rem;
+    height: 3.3rem;
+    right: 67px;
+    bottom: 67px;
+  }
+`;
+
+export const ChangeNameArea = styled.div`
+  max-width: 31rem;
+  display: flex;
+  filter: drop-shadow(0px 0px 1px rgba(9, 30, 66, 0.31))
+    drop-shadow(0px 20px 32px rgba(9, 30, 66, 0.25));
+  justify-content: center;
+  height: 4.8rem;
+  align-items: center;
+  z-index: 3;
+  margin-top: 1.8rem;
+  div {
+    margin-top: 0;
+    flex: 2;
+    height: 100%;
+  }
+  input {
+    width: 100%;
+    border: 1px solid ${({ theme }) => theme.colors.neutrals[600]};
+    margin-top: 0;
+    border-radius: 4px;
+  }
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4.8rem;
+    height: 100%;
+    margin-left: 0.8rem;
+    background: ${({ theme }) => theme.colors.neutrals[300]};
+    border-radius: 4px;
+    border: none;
+    :hover {
+      background: ${({ theme }) => theme.colors.neutrals[400]};
+      cursor: pointer;
+    }
+    :active {
+      background: ${({ theme }) => theme.colors.neutrals[500]};
+    }
+    img {
+      width: 1.6rem;
+    }
+  }
+  button:nth-child(3) {
+    img {
+      width: 1.38rem;
+    }
+  }
+`;
+export const TitlteEditArea = styled.div`
+  display: flex;
+  margin-top: 2.4rem;
+  justify-content: flex-start;
+  align-items: center;
+  img {
+    margin-left: 2.8rem;
+    :hover {
+      cursor: pointer;
+    }
+  }
 `;
 
 export const CloseButton = styled.button`
@@ -122,6 +211,12 @@ export const Pokemon = styled.img`
   height: 16rem;
 `;
 
+export const Camera = styled.img`
+  width: auto;
+  transition: 1000ms ease-in-out;
+  height: auto;
+`;
+
 export const InfoList = styled.ul`
   width: 100%;
   display: flex;
@@ -138,6 +233,9 @@ export const InfoList = styled.ul`
     justify-content: space-between;
     align-items: center;
     flex: 1;
+  }
+  h1 {
+    margin-top: 0.6rem;
   }
 `;
 

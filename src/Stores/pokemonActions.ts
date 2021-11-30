@@ -22,19 +22,25 @@ export function setCatchedPokemon(pokemon: object) {
   };
 }
 
-export function getPokemons() {
-  const pokemons = JSON.parse(sessionStorage.getItem("pokemons") || "[]");
-  return {
-    type: "POKEMON_LIST_GET_POKEMON",
-    payload: pokemons,
-  };
-}
-
 export function removePokemon(pokemon: object) {
   clearPokemon();
   return {
     type: "POKEMON_LIST_REMOVE_POKEMON",
     payload: pokemon,
+  };
+}
+export function updatePokemon(pokemon: string) {
+  return {
+    type: "POKEMON_UPDATE_POKEMON",
+    payload: pokemon,
+  };
+}
+
+export function getPokemons() {
+  const pokemons = JSON.parse(sessionStorage.getItem("pokemons") || "[]");
+  return {
+    type: "POKEMON_LIST_GET_POKEMON",
+    payload: pokemons,
   };
 }
 

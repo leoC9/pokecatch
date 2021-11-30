@@ -34,7 +34,7 @@ export const SideBarItem = styled.li<LiProps>`
   font-size: 4rem;
   font-weight: bold;
   color: ${({ theme }) => theme.colors.dark};
-  cursor: pointer;
+  cursor: ${(props) => (props.pokemonColor ? "pointer" : "default")};
   transition: all 0.2s;
   background-color: ${(props) =>
     ({ theme }) =>

@@ -2,6 +2,7 @@ import React from "react";
 import Typography from "../Typography";
 import * as S from "./styles";
 import plusIcon from "../../Assets/images/plus.png";
+import plusIcon2 from "../../Assets/images/plusIcon.png";
 
 interface ButtonProps {
   children?: string | JSX.Element;
@@ -9,12 +10,16 @@ interface ButtonProps {
   type?: string;
   onClick?: Function;
   disabled?: boolean;
+  modalButton?: boolean;
 }
 
 type buttonOptions = {
   [key: string]: JSX.Element;
 };
 const Button = (props: ButtonProps) => {
+  const handleFileUpload = (event: any) => {
+    console.log(event.target.files[0].name);
+  };
   const typeHandler: buttonOptions = {
     default: (
       <S.Button
@@ -25,13 +30,27 @@ const Button = (props: ButtonProps) => {
         {props.children}
       </S.Button>
     ),
-    addButton: (
+    addButton: !props.modalButton ? (
       <S.AddButton
+        modalButton={props.modalButton}
         size={props.width}
         onClick={props.onClick}
         disabled={props.disabled || false}
       >
-        <img src={plusIcon} />
+        {!props.modalButton ? <img src={plusIcon} /> : <img src={plusIcon2} />}
+      </S.AddButton>
+    ) : (
+      <S.AddButton
+        modalButton={props.modalButton}
+        size={props.width}
+        disabled={props.disabled || false}
+      >
+        {!props.modalButton ? <img src={plusIcon} /> : <img src={plusIcon2} />}
+        <input
+          onChange={handleFileUpload}
+          type="file"
+          style={{ opacity: "0" }}
+        />
       </S.AddButton>
     ),
   };

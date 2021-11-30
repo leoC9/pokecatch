@@ -7,6 +7,7 @@ import { getRandomPokemon } from "../../Services/pokémons";
 import Sidebar from "../../Components/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemons, getWildPokemon } from "../../Stores/pokemonActions";
+import Input from "../../Components/Input";
 
 const PokeMap = () => {
   const [ashActive, setAshActive] = useState(false);
@@ -63,6 +64,7 @@ const PokeMap = () => {
         <S.CharacterArea animationStatic={ashActive || slotFull ? true : false}>
           {ashSpites}
         </S.CharacterArea>
+        {/* <Input label="teste" /> */}
       </S.Background>
       <Modal modalProps={modalProps} setModalProps={setModalProps} />
     </>

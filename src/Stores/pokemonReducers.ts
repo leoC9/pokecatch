@@ -17,6 +17,11 @@ export default function tagsListReducers(
       return { ...state, pokemon: action.payload };
     case "POKEMON_DATA_GET_CATCHED_POKEMON":
       return { ...state, pokemon: action.payload };
+    case "POKEMON_UPDATE_POKEMON":
+      sessionStorage.setItem("pokemons", JSON.stringify(state.catchedPokemons));
+      return {
+        ...state,
+      };
     case "POKEMON_LIST_SET_POKEMON":
       sessionStorage.setItem(
         "pokemons",

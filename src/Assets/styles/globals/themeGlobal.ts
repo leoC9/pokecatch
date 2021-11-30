@@ -3,6 +3,8 @@ export const theme = {
     default: "#00D68F",
     dark: "#004A45",
     transparent: "#00D68F",
+    inputFocus: "#598BFF",
+    inputError: "#FF3D71",
     gradient: "linear-gradient(90deg, #43E97B 0%, #38F9D7 100%)",
     actionDefault: "#FF3D71",
     actionDark: "#DB2C66",

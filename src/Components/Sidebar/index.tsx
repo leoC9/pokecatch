@@ -28,6 +28,7 @@ const Sidebar = (props: SidebarProps) => {
       }, 2500);
       return;
     }
+    props.setModalProps({ active: true, type: "add" });
   }
 
   function editPokemon(pokemon: object) {
@@ -45,7 +46,7 @@ const Sidebar = (props: SidebarProps) => {
             <S.SideBarItem
               onClick={() => editPokemon(item)}
               pokemonColor={true}
-              src={item.sprites.front_default}
+              src={item?.sprites.front_default}
             ></S.SideBarItem>
           );
         })}

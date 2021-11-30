@@ -6,6 +6,7 @@ interface TypographyProps {
   children?: string;
   weight?: number;
   color?: string;
+  htmlFor?: string;
 }
 
 type typographyOptions = {
@@ -17,7 +18,11 @@ const Typography = (props: TypographyProps) => {
     title: <S.Title color={props.color}>{props.children}</S.Title>,
     subtitle: <S.SubTitle color={props.color}>{props.children}</S.SubTitle>,
     label: (
-      <S.Label color={props.color} weight={props.weight}>
+      <S.Label
+        htmlFor={props.htmlFor}
+        color={props.color}
+        weight={props.weight}
+      >
         {props.children}
       </S.Label>
     ),
