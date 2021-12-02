@@ -2,7 +2,7 @@ import * as S from "./styles";
 import plusIcon from "../../Assets/images/plus.png";
 import plusIcon2 from "../../Assets/images/plusIcon.png";
 import React from "react";
-import { FieldTypes } from "../types/field";
+import { FieldTypes } from "../GlobalTypes/field";
 
 interface ButtonProps {
   children?: string | JSX.Element;

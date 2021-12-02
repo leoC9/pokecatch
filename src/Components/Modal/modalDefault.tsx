@@ -183,7 +183,6 @@ const ModalDefault = (props: ModalProps) => {
       ),
     },
   };
-
   useEffect(() => {
     for (let i = 0; i < pokemon?.abilities.length; i++) {
       const element = pokemon.abilities[i];
@@ -191,6 +190,7 @@ const ModalDefault = (props: ModalProps) => {
     }
 
     setAbilities(abilityList.join(", "));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.modalProps.active]);
 
   return (

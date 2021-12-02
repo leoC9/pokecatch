@@ -7,7 +7,7 @@ import { clearPokemon, setCatchedPokemon } from "../../Stores/pokemonActions";
 import Button from "../Button";
 import Input from "../Input";
 import Typography from "../Typography";
-import { FieldTypes } from "../types/field";
+import { FieldTypes } from "../GlobalTypes/field";
 
 type modalData = {
   active: boolean;

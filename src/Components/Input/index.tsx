@@ -2,7 +2,7 @@ import React from "react";
 import Typography from "../Typography";
 import buttonNumberIcon from "../../Assets/images/chevronDownBlack.png";
 import Select from "react-select";
-import { FieldTypes } from "../types/field";
+import { FieldTypes } from "../GlobalTypes/field";
 import * as S from "./styles";
 
 interface InputProps {
