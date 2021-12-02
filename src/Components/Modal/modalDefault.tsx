@@ -175,7 +175,7 @@ const ModalDefault = (props: ModalProps) => {
                     </tr>
                   );
                 }
-                return;
+                return <></>;
               })}
             </table>
           </S.StatsArea>
