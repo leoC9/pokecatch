@@ -1,8 +1,5 @@
-import React, { useState } from "react";
-
+import React from "react";
 import Button from "../Button";
-
-import iconPlus from "../../Assets/images/plus.png";
 import { ReactComponent as Interrogation } from "../../Assets/images/interrogationIcon.svg";
 
 import * as S from "./styles";
@@ -14,11 +11,20 @@ interface SidebarProps {
   setModalProps: Function;
 }
 
+type PokemonTypes = {
+  name: string;
+  stats: Array<{ base_stat: number; stat: { name: string } }>;
+  height: number;
+  wheight: number;
+  abilities: Array<{ ability: { name: string } }>;
+  sprites: { front_default: string };
+  types: Array<{ type: { name: string } }>;
+};
+
 const Sidebar = (props: SidebarProps) => {
   const dispatch = useDispatch();
   const { catchedPokemons } = useSelector(({ pokemon }: any) => pokemon);
   let count = ["1", "2", "3", "4", "5", "6"];
-  console.log({ count });
 
   function handleClick() {
     if (catchedPokemons.length === 6) {
@@ -39,18 +45,18 @@ const Sidebar = (props: SidebarProps) => {
   return (
     <S.SideBarWrapper>
       <S.SideBarList>
-        {catchedPokemons.map((item: any) => {
-          console.log(item);
+        {catchedPokemons.map((item: PokemonTypes, i: number) => {
           count.pop();
           return (
             <S.SideBarItem
+              key={i}
               onClick={() => editPokemon(item)}
               pokemonColor={true}
               src={item?.sprites.front_default}
             ></S.SideBarItem>
           );
         })}
-        {count.map((i: any) => (
+        {count.map((i: string) => (
           <S.SideBarItem key={i}>
             <Interrogation />
           </S.SideBarItem>

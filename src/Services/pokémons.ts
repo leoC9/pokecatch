@@ -8,7 +8,6 @@ export function getRandomPokemon() {
 
       return resolve(response.data);
     } catch (error) {
-      console.log(error);
       return reject(error);
     }
   });

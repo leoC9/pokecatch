@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const InputWrapper = styled.div`
+interface InputProps {
+  error?: boolean;
+}
+
+export const InputWrapper = styled.div<InputProps>`
   width: 31.5rem;
   display: flex;
   flex-direction: column;
@@ -9,27 +13,16 @@ export const InputWrapper = styled.div`
   & .multiSelect input {
     height: 3.267rem;
   }
-  & .multiSelect__control {
-    background: ${({ theme }) => theme.colors.neutrals[100]};
-    border: 2px solid ${({ theme }) => theme.colors.neutrals[400]};
-    border-radius: 3px;
-    margin-top: 0.6rem;
-    padding-left: 0.8rem;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 15px;
-    line-height: 24px;
-    &:focus-within {
-      /* border: 1px solid #598bff; */
-    }
-    &:hover {
-      border: 2px solid ${({ theme }) => theme.colors.neutrals[400]};
-    }
-    /* background: ${({ theme }) => theme.colors.neutrals[500]}; */
+
+  & > div,
+  & > input {
+    border: ${(props) =>
+      ({ theme }) =>
+        props.error && `2px solid ${theme.colors.actionDefault}`};
   }
-  & .multiSelect__control--menu-is-focused,
-  & .multiSelect__control--menu-is-open {
-    border: 2px solid ${({ theme }) => theme.colors.inputFocus} !important;
+
+  & > h2 {
+    color: ${({ theme }) => theme.colors.actionDefault};
   }
 `;
 
@@ -83,6 +76,39 @@ export const InputNumber = styled.input`
     font-size: 15px;
     line-height: 24px;
     background: ${({ theme }) => theme.colors.neutrals[500]};
+  }
+`;
+
+export const MultiSelectArea = styled.div<InputProps>`
+  border: none !important;
+  & .multiSelect__control--menu-is-focused,
+  & .multiSelect__control--menu-is-open {
+    border: 2px solid ${({ theme }) => theme.colors.inputFocus} !important;
+  }
+
+  & .multiSelect__control {
+    background: ${({ theme }) => theme.colors.neutrals[100]};
+    border: ${(props) =>
+      ({ theme }) =>
+        props.error
+          ? `2px solid ${theme.colors.actionDefault}`
+          : `2px solid ${theme.colors.neutrals[400]}`};
+    border-radius: 3px;
+    margin-top: 0.6rem;
+    padding-left: 0.8rem;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 24px;
+    &:focus-within {
+    }
+    &:hover {
+      border: ${(props) =>
+        ({ theme }) =>
+          props.error
+            ? `2px solid ${theme.colors.actionDefault}`
+            : `2px solid ${theme.colors.neutrals[400]}`};
+    }
   }
 `;
 

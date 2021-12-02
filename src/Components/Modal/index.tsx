@@ -1,23 +1,3 @@
-import React, { useState, useEffect } from "react";
-import Type from "../Type";
-import Typography from "../Typography";
-import * as S from "./styles";
-import { ReactComponent as Pokeball } from "../../Assets/images/Pokeball.svg";
-import closeIcon from "../../Assets/images/close.png";
-import checkIcon from "../../Assets/images/checkIcon.png";
-import editIcon from "../../Assets/images/editIcon.png";
-import shieldIcon from "../../Assets/images/shield.png";
-import swordIcon from "../../Assets/images/sword.png";
-import speedIcon from "../../Assets/images/speed.png";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  clearPokemon,
-  removePokemon,
-  setCatchedPokemon,
-  updatePokemon,
-} from "../../Stores/pokemonActions";
-import Button from "../Button";
-import Input from "../Input";
 import ModalDefault from "./modalDefault";
 import ModalCreate from "./modalCreate";
 
@@ -32,7 +12,7 @@ interface ModalProps {
 }
 
 type modalDataOptions = {
-  [key: string]: any;
+  [key: string]: JSX.Element;
 };
 const Modal = (props: ModalProps) => {
   const modalTypeHandler: modalDataOptions = {

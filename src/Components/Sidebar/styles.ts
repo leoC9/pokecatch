@@ -24,7 +24,6 @@ export const SideBarItem = styled.li<LiProps>`
   align-items: center;
   justify-content: center;
   width: 5.3rem;
-  //6.4
   height: 5.3rem;
   border: 4px solid
     ${(props) =>

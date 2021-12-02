@@ -18,40 +18,49 @@ export const Background = styled.div`
   left: 0;
 `;
 
-export const Modal = styled.figcaption`
+export const Modal = styled.div`
+  opacity: 0;
+  transform: translateY(10rem);
+  animation: anime 0.5s forwards;
   width: 36rem;
   height: 55.9rem;
   position: relative;
   background: ${({ theme }) => theme.colors.neutrals[200]};
 
   border-radius: 8px;
+  @media (max-width: 800px) {
+    width: 100%;
+    height: 100%;
+  }
+  @keyframes anime {
+    to {
+      opacity: 1;
+      transform: initial;
+    }
+  }
 `;
 export const ModalHeader = styled.header`
-  /* width: 30vw; */
   width: 36rem;
-  /* height: 77vh; */
   height: 55.9rem;
   background: ${({ theme }) => theme.colors.gradient};
-  /* border-radius: 13px; */
   border-radius: 8px;
   display: flex;
   position: absolute;
+  @media (max-width: 800px) {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const ModalArea = styled.div`
-  //TODO AJUSTAR
-  /* width: 30vw; */
   width: 100%;
-  /* height: 77vh; */
-
   height: 100%;
   overflow-y: auto;
   ::-webkit-scrollbar {
     display: none;
   }
-  -ms-overflow-style: none; /* IE and Edge */
+  -ms-overflow-style: none;
   scrollbar-width: none;
-  /* border-radius: 13px; */
   border-radius: 8px;
   display: flex;
   position: relative;
@@ -69,9 +78,7 @@ export const ModalContent = styled.main`
   align-items: center;
   align-self: flex-end;
   background: ${({ theme }) => theme.colors.neutrals[200]};
-  /* border-radius: 45px 45px 13px 13px; */
   border-radius: 24px 24px 8px 8px;
-  /* padding-bottom: 16rem; */
   & > img {
     position: absolute;
     right: 100px;
@@ -82,6 +89,9 @@ export const ModalContent = styled.main`
   }
   & > section:last-child {
     padding-bottom: 16rem;
+  }
+  @media (max-width: 800px) {
+    padding: 4.2rem 2.5rem 16.2rem 2.5rem;
   }
 `;
 export const ContentData = styled.div`
@@ -98,9 +108,7 @@ export const ContentData = styled.div`
 `;
 
 export const ImageArea = styled.figcaption`
-  /* width: 33rem; */
   width: 24.7rem;
-  /* height: 33rem; */
   height: 24.7rem;
   display: flex;
   justify-content: center;
@@ -108,7 +116,6 @@ export const ImageArea = styled.figcaption`
   position: absolute;
   border: 5px solid ${({ theme }) => theme.colors.default};
   top: 32px;
-  /* right: calc(50% - 33rem / 2); */
   right: calc(50% - 24.7rem / 2);
   background: ${({ theme }) => theme.colors.neutrals[200]};
   border-radius: 50%;
@@ -262,7 +269,6 @@ export const ElementArea = styled.section`
   align-items: center;
   margin-top: 2.7rem;
 `;
-//TODO - MUDAR A ORDEM DA LISTA
 export const StatsArea = styled.section`
   width: 100%;
   margin-top: 2.7rem;
@@ -321,11 +327,10 @@ export const Loader = styled.div`
 `;
 
 export const PokeballButton = styled.button<ModalProps>`
-  /* width: 12rem;
-  height: 12rem; */
   position: absolute;
   background: transparent;
   border: none;
+  transition: 0.2s ease-in-out;
   bottom: ${(props) => (props.typeModal === "capture" ? "0" : "52px")};
   z-index: 10;
   right: calc(
@@ -333,6 +338,10 @@ export const PokeballButton = styled.button<ModalProps>`
       2
   );
   :hover {
+    transform: scale(107%);
     cursor: pointer;
+  }
+  :active {
+    transform: scale(90%);
   }
 `;

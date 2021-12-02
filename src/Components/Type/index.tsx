@@ -31,7 +31,6 @@ const Type = (props: TypeProps) => {
     steel: "aço",
     water: "água",
   };
-  console.log("type", props.type);
 
   return (
     <TypeTag type={props.type}>

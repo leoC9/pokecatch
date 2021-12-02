@@ -21,6 +21,15 @@ export const Background = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 0;
+  transform: translateX(-10px);
+  animation: anime 0.4s forwards;
+  @keyframes anime {
+    to {
+      opacity: 1;
+      transform: initial;
+    }
+  }
 `;
 export const CharacterArea = styled.main<PokeMapProps>`
   width: 6.4rem;
@@ -43,16 +52,12 @@ export const CharacterArea = styled.main<PokeMapProps>`
   }
 `;
 export const Ash = styled.img<PokeMapProps>`
-  /* width: 8.5rem;
-  height: 8.5rem; */
   margin: 0 auto;
   :hover {
     cursor: ${({ cursorDisabled }) => (cursorDisabled ? "no-drop" : "pointer")};
   }
 `;
 export const AshWalking = styled.div`
-  /* width: 5.944rem;
-  height: 7.172rem; */
   width: 4.4rem;
   height: 5.4rem;
   background: url(${ashStop}) no-repeat;

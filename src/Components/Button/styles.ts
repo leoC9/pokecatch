@@ -4,7 +4,7 @@ interface ButtonProps {
   size?: number;
   modalButton?: boolean;
 }
-export const Button: any = styled.button<ButtonProps>`
+export const Button = styled.button<ButtonProps>`
   width: ${(props) => props.size || 12.4}rem;
   height: 5.6rem;
   border-radius: 42px;
@@ -23,7 +23,7 @@ export const Button: any = styled.button<ButtonProps>`
     transform: translateY(2px);
   }
 `;
-export const AddButton: any = styled.button<ButtonProps>`
+export const AddButton = styled.button<ButtonProps>`
   width: ${(props) => props.size || 5.3}rem;
   height: 5.3rem;
   position: relative;
@@ -63,6 +63,7 @@ export const AddButton: any = styled.button<ButtonProps>`
   }
   input {
     position: absolute;
+    opacity: 0;
     width: 100%;
     left: 0;
     height: 100%;

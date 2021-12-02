@@ -28,18 +28,19 @@ interface ModalProps {
   modalProps: modalData;
   setModalProps: Function;
 }
-
-interface PokeTeste {
-  pokemon: any;
-}
+type PokemonTypes = {
+  type: { name: string };
+};
+type PokemonStats = {
+  stat: { name: string };
+  base_stat?: string;
+};
 
 type modalDataOptions = {
   [key: string]: any;
 };
 const ModalDefault = (props: ModalProps) => {
-  const { pokemon, catchedPokemons } = useSelector(
-    ({ pokemon }: PokeTeste) => pokemon
-  );
+  const { pokemon } = useSelector(({ pokemon }: any) => pokemon);
   const [abilities, setAbilities] = useState();
   const [changeNameActive, setChangeNameActive] = useState(false);
   const [newNameValue, setNewNameValue] = useState<string>("");
@@ -61,11 +62,8 @@ const ModalDefault = (props: ModalProps) => {
 
   function checkButtonHandleClick() {
     if (newNameValue !== "") {
-      // const newPokemon = { ...pokemon, name: newNameValue };
       pokemon.name = newNameValue;
       dispatch(updatePokemon(pokemon));
-
-      // pokemon?.name === newNameValue;
     }
     setChangeNameActive(false);
   }
@@ -104,21 +102,21 @@ const ModalDefault = (props: ModalProps) => {
         <S.ChangeNameArea>
           <Input
             value={newNameValue.toUpperCase()}
-            onChange={(e: any) => setNewNameValue(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setNewNameValue(e.target.value)
+            }
             type="default"
           />
           <button onClick={checkButtonHandleClick}>
             <img src={checkIcon} alt="" />
           </button>
-          <button>
-            <img
-              onClick={() => {
-                setNewNameValue(pokemon?.name);
-                setChangeNameActive(false);
-              }}
-              src={closeIcon}
-              alt=""
-            />
+          <button
+            onClick={() => {
+              setNewNameValue(pokemon?.name);
+              setChangeNameActive(false);
+            }}
+          >
+            <img src={closeIcon} alt="close" />
           </button>
         </S.ChangeNameArea>
       ) : (
@@ -130,6 +128,7 @@ const ModalDefault = (props: ModalProps) => {
               setNewNameValue(pokemon?.name);
             }}
             src={editIcon}
+            alt="editName"
           />
         </S.TitlteEditArea>
       ),
@@ -142,7 +141,7 @@ const ModalDefault = (props: ModalProps) => {
           </S.DividerArea>
           <S.StatsArea>
             <table>
-              {pokemon?.stats.map((item: any, i: number) => {
+              {pokemon?.stats.map((item: PokemonStats, i: number) => {
                 const statsTable: modalDataOptions = {
                   attack: { icon: swordIcon, name: "Ataque" },
                   defense: { icon: shieldIcon, name: "Defesa" },
@@ -160,7 +159,10 @@ const ModalDefault = (props: ModalProps) => {
                   return (
                     <tr>
                       <td>
-                        <img src={statsTable[item.stat.name]?.icon} />
+                        <img
+                          src={statsTable[item.stat.name]?.icon}
+                          alt={item.stat.name}
+                        />
                         <Typography type="label" weight={700}>
                           {statsTable[item.stat.name]?.name}
                         </Typography>
@@ -173,6 +175,7 @@ const ModalDefault = (props: ModalProps) => {
                     </tr>
                   );
                 }
+                return;
               })}
             </table>
           </S.StatsArea>
@@ -204,7 +207,7 @@ const ModalDefault = (props: ModalProps) => {
                 dispatch(clearPokemon());
               }}
             >
-              <img src={closeIcon} />
+              <img src={closeIcon} alt="close" />
             </S.CloseButton>
           </S.ModalHeader>
           <S.ModalContent>
@@ -225,8 +228,8 @@ const ModalDefault = (props: ModalProps) => {
               <S.Divider />
             </S.DividerArea>
             <S.ElementArea>
-              {pokemon?.types.map((item: any) => (
-                <Type type={item.type.name} />
+              {pokemon?.types.map((item: PokemonTypes, i: number) => (
+                <Type key={i} type={item.type.name} />
               ))}
             </S.ElementArea>
             <S.DividerArea>
