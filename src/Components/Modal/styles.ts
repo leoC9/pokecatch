@@ -28,7 +28,7 @@ export const Modal = styled.div`
   background: ${({ theme }) => theme.colors.neutrals[200]};
 
   border-radius: 8px;
-  @media (max-width: 800px) {
+  @media (max-width: 420px) {
     width: 100%;
     height: 100%;
   }
@@ -46,7 +46,7 @@ export const ModalHeader = styled.header`
   border-radius: 8px;
   display: flex;
   position: absolute;
-  @media (max-width: 800px) {
+  @media (max-width: 420px) {
     width: 100%;
     height: 100%;
   }
@@ -90,7 +90,7 @@ export const ModalContent = styled.main`
   & > section:last-child {
     padding-bottom: 16rem;
   }
-  @media (max-width: 800px) {
+  @media (max-width: 420px) {
     padding: 4.2rem 2.5rem 16.2rem 2.5rem;
   }
 `;
